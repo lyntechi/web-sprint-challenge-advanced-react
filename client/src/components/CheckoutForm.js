@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useForm} from '../hooks/useForm'
+import { useForm } from "../hooks/useForm";
 
 const initialValue = {
   firstName: "",
@@ -16,8 +16,7 @@ const initialValue = {
 
 const CheckoutForm = (props) => {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [handleChanges, values, setValues] = useForm()
-
+  const [handleChanges, values, setValues] = useForm();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,9 +27,10 @@ const CheckoutForm = (props) => {
     <>
       <form onSubmit={handleSubmit}>
         <h2>Checkout Form</h2>
-        <label>
+        <label htmlFor='firstName'>
           First Name:
           <input
+            id='firstName'
             name="firstName"
             value={values.firstName}
             onChange={handleChanges}

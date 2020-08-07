@@ -17,18 +17,32 @@ export default class PlantList extends Component {
   /*********  DON'T CHANGE ANYTHING IN THE RENDER FUNCTION *********/
 
   componentDidMount() {
-    axios.get("http://localhost:3333/plants")
-    .then((response) => {
-    this.setState({
-      plants: response.data.plantsData
-     })
-    console.log(response.data.plantsData)
-   
-    })
-    .catch((error) =>{
-      console.log('error happend with response', error)
-    })
-  
+    axios
+      .get("http://localhost:3333/plants")
+      .then((response) => {
+        this.setState({
+          plants: response.data.plantsData,
+        });
+        console.log(response.data.plantsData);
+      })
+      .catch((error) => {
+        console.log("error happend with response", error);
+      });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.plants !== this.state.plants) {
+      axios
+        .get("http://localhost:3333/plants")
+        .then((response) => {
+          this.setState({
+            plants: response.data.plantsData,
+          });
+          console.log(response.data.plantsData);
+        })
+        .catch((error) => {
+          console.log("error happend with response", error);
+        });
+    }
   }
 
   render() {
