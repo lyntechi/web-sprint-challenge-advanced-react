@@ -9,6 +9,7 @@ import "./App.css";
 function App() {
   // array of plants that have been added to the cart
   const [cart, setCart] = useState([]);
+
  
 
   // add a plant to the cart
@@ -20,7 +21,7 @@ function App() {
   const removeFromCart = (plant) => {
     setCart(cart.filter((p) => p.id !== plant.id));
   };
-
+  
   return (
     <div>
       <Router>
@@ -41,6 +42,7 @@ function App() {
                   {cart.length > 0 && cart.length}
                 </span>
               </NavLink>
+              
             </li>
           </ul>
         </nav>
