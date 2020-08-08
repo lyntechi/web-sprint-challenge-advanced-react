@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import SearchForm from "./SearchForm";
 
 export default class PlantList extends Component {
   // add state with a property called "plants" - initialize as an empty array
@@ -7,6 +8,7 @@ export default class PlantList extends Component {
     super();
     this.state = {
       plants: [],
+      searchText: "",
     };
   }
 
@@ -29,26 +31,22 @@ export default class PlantList extends Component {
         console.log("error happend with response", error);
       });
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.plants !== this.state.plants) {
-      axios
-        .get("http://localhost:3333/plants")
-        .then((response) => {
-          this.setState({
-            plants: response.data.plantsData,
-          });
-          console.log(response.data.plantsData);
-        })
-        .catch((error) => {
-          console.log("error happend with response", error);
-        });
-    }
-  }
+
+  handleInput = (e) => {
+    this.setState({
+      searchText: e.target.value,
+    });
+  };
 
   render() {
+    let filteredPlants = this.state.plants.filter((plant) => {
+      return plant.name.toLowerCase().includes(this.state.searchText);
+    });
+
     return (
       <main className="plant-list">
-        {this.state.plants.map((plant) => (
+        <SearchForm handleInput={this.handleInput} />
+        {filteredPlants.map((plant) => (
           <div className="plant-card" key={plant.id}>
             <img className="plant-image" src={plant.img} alt={plant.name} />
             <div className="plant-details">

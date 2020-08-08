@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
-
 import PlantList from "./components/PlantList";
 import ShoppingCart from "./components/ShoppingCart";
 import CheckoutForm from "./components/CheckoutForm";
@@ -10,6 +9,7 @@ import "./App.css";
 function App() {
   // array of plants that have been added to the cart
   const [cart, setCart] = useState([]);
+ 
 
   // add a plant to the cart
   const addToCart = (plant) => {
@@ -44,11 +44,14 @@ function App() {
             </li>
           </ul>
         </nav>
+       
         <Route
           exact
           path="/"
-          render={() => <PlantList addToCart={addToCart} />}
+          render={() => <PlantList addToCart={addToCart}  />
+        }
         />
+        
         <Route
           path="/cart"
           render={(props) => (
